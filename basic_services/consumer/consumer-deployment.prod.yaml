@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: consumer
+  namespace: leaf-image-management-system
+  labels:
+    app: consumer
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: consumer
+  template:
+    metadata:
+      labels:
+        app: consumer
+    spec:
+      containers:
+        - name: consumer
+          image: kunren01/consumer:1.0  #todo
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+          env:
+            - name: ENV
+              value: 'prod'
+            # Kafka connection Config
+            - name: KAFKA_BOOTSTRAP_SERVERS
+              value: "kafka-service.leaf-image-management-system.svc.cluster.local:9092"
+            - name: KAFKA_GROUP_ID
+              value: "synchronizer"
+            # MongoDB's connection Config
+            - name: MONGO_HOST
+              value: "mongodb-consumer.leaf-image-management-system.svc.cluster.local"
+            - name: MONGO_PORT
+              value: "27017"
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "250m"
+            limits:
+              memory: "1Gi"
+              cpu: "500m"
+      restartPolicy: Always

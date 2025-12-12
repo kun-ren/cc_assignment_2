@@ -33,6 +33,9 @@ echo "Started deploying the leaf image management system"
 echo "Creating the namespace"
 apply_kubectl basic_services/common/00-leaf-image-management-system-namespace.yaml
 
+echo "Deploying the LoadBalancer"
+apply_kubectl basic_services/common/ngnix-ingress-controller.yaml
+
 
 # Deploy the kafka cluster
 echo "Deploying the kafka cluster"
@@ -90,6 +93,12 @@ apply_kubectl basic_services/jobs/outer_jobs/db_synchronizer/prod/00-db-synchron
 apply_kubectl basic_services/jobs/outer_jobs/db_synchronizer/prod/01-db-synchronizer-service.prod.yaml
 apply_kubectl basic_services/jobs/outer_jobs/db_synchronizer/prod/02-db-synchronizer-ingress.prod.yaml
 try_add_firewall_rule node-db-synchronizer-port "$project_id" 30552
+
+
+echo "Starting the consumer service"
+apply_kubectl basic_services/consumer/consumer-deployment.prod.yaml
+apply_kubectl basic_services/consumer/consumer-service.prod.yaml
+apply_kubectl basic_services/consumer/consumer-ingress.prod.yaml
 
 
 echo "Finished deploying the leaf image management system"

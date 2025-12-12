@@ -64,8 +64,12 @@ echo "Starting the leaf disease recognizer job"
 apply_kubectl basic_services/jobs/inner_jobs/leaf_disease_recognizer/stg/00-leaf-disease-recognizer-deployment.stg.yaml
 apply_kubectl basic_services/jobs/inner_jobs/leaf_disease_recognizer/stg/01-leaf-disease-recognizer-service.stg.yaml
 
-echo "Starting the db synchronizer job"
-apply_kubectl basic_services/jobs/outer_jobs/db_synchronizer/stg/00-db-synchronizer-deployment.stg.yaml
-apply_kubectl basic_services/jobs/outer_jobs/db_synchronizer/stg/01-db-synchronizer-service.stg.yaml
+#echo "Starting the db synchronizer job"
+#apply_kubectl basic_services/jobs/outer_jobs/db_synchronizer/stg/00-db-synchronizer-deployment.stg.yaml
+#apply_kubectl basic_services/jobs/outer_jobs/db_synchronizer/stg/01-db-synchronizer-service.stg.yaml
+
+echo "Starting the consumer service"
+apply_kubectl basic_services/consumer/consumer-deployment.stg.yaml
+apply_kubectl basic_services/consumer/consumer-service.stg.yaml
 
 echo "Finished deploying the leaf image management system"
