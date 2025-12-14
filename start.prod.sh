@@ -34,7 +34,7 @@ echo "Creating the namespace"
 apply_kubectl basic_services/common/00-leaf-image-management-system-namespace.yaml
 
 echo "Deploying the LoadBalancer"
-apply_kubectl kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.9.5/deploy/static/provider/cloud/deploy.yaml
+apply_kubectl https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.9.5/deploy/static/provider/cloud/deploy.yaml
 
 
 # Deploy the kafka cluster
