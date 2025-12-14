@@ -88,11 +88,11 @@ apply_kubectl basic_services/jobs/inner_jobs/users/prod/01-users-service.prod.ya
 apply_kubectl basic_services/jobs/inner_jobs/users/prod/02-users-ingress.prod.yaml
 try_add_firewall_rule node-users-port "$project_id" 30551
 
-#echo "Starting the db synchronizer job"
-#apply_kubectl basic_services/jobs/outer_jobs/db_synchronizer/prod/00-db-synchronizer-deployment.prod.yaml
-#apply_kubectl basic_services/jobs/outer_jobs/db_synchronizer/prod/01-db-synchronizer-service.prod.yaml
-#apply_kubectl basic_services/jobs/outer_jobs/db_synchronizer/prod/02-db-synchronizer-ingress.prod.yaml
-#try_add_firewall_rule node-db-synchronizer-port "$project_id" 30552
+echo "Starting the db synchronizer job"
+apply_kubectl basic_services/jobs/outer_jobs/db_synchronizer/prod/00-db-synchronizer-deployment.prod.yaml
+apply_kubectl basic_services/jobs/outer_jobs/db_synchronizer/prod/01-db-synchronizer-service.prod.yaml
+apply_kubectl basic_services/jobs/outer_jobs/db_synchronizer/prod/02-db-synchronizer-ingress.prod.yaml
+try_add_firewall_rule node-db-synchronizer-port "$project_id" 30552
 
 
 echo "Starting the consumer service"
